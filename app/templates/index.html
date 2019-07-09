@@ -84,7 +84,51 @@
 		</div>
 	</div>
 	<script>
-	  // your solution here
+	  var rotates = document.getElementById("rotate-box");
+    var pinches = document.getElementById("pinch-box");
+    var presses = document.getElementById("press-box");
+    var pans = document.getElementById("pan-box");
+    var Taps = document.getElementById("tap-box");
+    var Swips = document.getElementById("swipe-box");
+    var rotateHammer = new Hammer(rotates);
+    var pinchHammer = new Hammer(pinches);
+    var pressHammer = new Hammer(presses);
+    var panHammer = new Hammer(pans);
+    var tapHammer = new Hammer(Taps);
+    var swipeHammer = new Hammer(Swips);
+    
+    rotateHammer.get('rotate').set({ enable: true });
+    pinchHammer.get('pinch').set({ enable: true });
+    
+    rotateHammer.on('rotatemove',function(rotates){
+      var transform = "rotate("+rotates.angle+"deg)";
+      $("#rotate-box").css("transform",transform);
+                    });
+    pinchHammer.on('pinch',function(pinches){
+      $("#pinch-box").css("height","40px");
+      $("#pinch-box").css("width","40px");
+    });
+    
+    pressHammer.on('press',function(presses){
+    $("#press-box").css("background-color","red");
+    })
+    
+    panHammer.on('pan',function(pans){
+    $("#pan-box").css("position","float");
+    $("#pan-box").css("transform","translateX("+pans.deltaX+"px)");
+    })
+    
+    tapHammer.on('tap',function(Taps){
+    $("#tap-box").css("background-color","red");
+    })
+    
+    swipeHammer.on('swipeleft',function(Swips){
+    $("#swipe-box").css("background-color","red");
+    })
+    swipeHammer.on('swiperight',function(Swips){
+    $("#swipe-box").css("background-color","blue");
+    })
+    
   </script>
 </body>
 </html>
